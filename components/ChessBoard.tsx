@@ -1,22 +1,62 @@
-const ChessBoard = () => {
+import { Dispatch, SetStateAction, useState } from "react";
+import { legalMoves } from "../utils/Helper";
+
+type LegalMove = {
+  row: number;
+  col: number;
+};
+
+type Selected = {
+  row: number;
+  col: number;
+};
+
+type Props = {
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
+};
+
+const ChessBoard = ({ isActive, setIsActive }: Props) => {
+  const [selected, setSelected] = useState<Selected>();
+  const [legal, setLegal] = useState<LegalMove[]>([]);
+
   const cols = ["a", "b", "c", "d", "e", "f", "g", "h"];
   const rows = [8, 7, 6, 5, 4, 3, 2, 1];
+
+  const handleClick = (row: number, col: number) => {
+    setIsActive(true);
+    setSelected({ row, col });
+    setLegal(legalMoves(row, col));
+  };
 
   return (
     <table>
       <tbody>
-        {rows.map((row) => {
+        {rows.map((row, idx) => {
           return (
-            <tr>
+            <tr key={idx}>
               {cols.map((col, index) => {
                 const isWhite = row % 2 === index % 2;
+                const isSelected =
+                  row === selected?.row && index === selected?.col;
+                const isLegal =
+                  isActive &&
+                  legal.find((move) => move.row === row && move.col === index);
                 return (
                   <td
+                    key={index}
                     className={`border border-black py-5 px-6 text-lg ${
+                      isSelected && "bg-primary text-white"
+                    } ${isLegal && "bg-green-500"} ${
                       isWhite ? "bg-white text-black" : "bg-black text-white"
-                    }`}
+                    } `}
                   >
-                    <button className="btn btn-info w-full border-none bg-inherit text-inherit">
+                    <button
+                      className={`btn btn-primary w-full border-none bg-inherit ${
+                        isLegal ? "text-black" : "text-inherit"
+                      } hover:text-white`}
+                      onClick={() => handleClick(row, index)}
+                    >
                       {col}
                       {row}
                     </button>
