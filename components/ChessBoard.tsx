@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
+import { Selected } from "../pages";
 import { legalMoves } from "../utils/Helper";
 
 type LegalMove = {
@@ -6,18 +7,19 @@ type LegalMove = {
   col: number;
 };
 
-type Selected = {
-  row: number;
-  col: number;
-};
-
 type Props = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
+  selected: Selected | undefined;
+  setSelected: Dispatch<SetStateAction<Selected | undefined>>;
 };
 
-const ChessBoard = ({ isActive, setIsActive }: Props) => {
-  const [selected, setSelected] = useState<Selected>();
+const ChessBoard = ({
+  isActive,
+  setIsActive,
+  selected,
+  setSelected,
+}: Props) => {
   const [legal, setLegal] = useState<LegalMove[]>([]);
 
   const cols = ["a", "b", "c", "d", "e", "f", "g", "h"];
