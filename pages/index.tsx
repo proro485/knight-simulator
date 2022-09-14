@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import Alert from "../components/Alert";
 import ChessBoard from "../components/ChessBoard";
 
 export type Selected = {
@@ -17,13 +18,14 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-col items-center space-y-10">
+    <div className="my-8 flex flex-col items-center space-y-5">
       <div className="flex space-x-5">
         <div className="text-5xl font-bold text-white">Chessboard</div>
         <button className="btn" onClick={handleReset}>
           Reset
         </button>
       </div>
+      <Alert />
       <ChessBoard
         isActive={isActive}
         setIsActive={setIsActive}
