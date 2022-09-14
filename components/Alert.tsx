@@ -16,7 +16,7 @@ const Alert = () => {
           ></path>
         </svg>
         <span className="text-sm font-medium">
-          Click any position to see the valid move for a Knight, you can reset
+          Click any position to see the valid moves for a Knight, you can reset
           the board by pressing the button above.
         </span>
       </div>

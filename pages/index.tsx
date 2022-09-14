@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   return (
     <div className="my-8 flex flex-col items-center space-y-5">
       <div className="flex space-x-5">
-        <div className="text-5xl font-bold text-white">Chessboard</div>
+        <div className="text-5xl font-bold text-white">Knight Simulator</div>
         <button className="btn" onClick={handleReset}>
           Reset
         </button>
