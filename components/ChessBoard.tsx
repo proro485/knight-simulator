@@ -44,19 +44,22 @@ const ChessBoard = ({
                 const isLegal =
                   isActive &&
                   legal.find((move) => move.row === row && move.col === index);
+
                 return (
                   <td
                     key={index}
                     className={`border border-black py-5 px-6 text-lg ${
-                      isSelected && "bg-primary text-white"
-                    } ${isLegal && "bg-green-500"} ${
-                      isWhite ? "bg-white text-black" : "bg-black text-white"
-                    } `}
+                      isLegal
+                        ? "bg-green-500 text-black"
+                        : isSelected
+                        ? "bg-primary text-white"
+                        : isWhite
+                        ? "bg-white text-black"
+                        : "bg-black text-white"
+                    }`}
                   >
                     <button
-                      className={`btn btn-primary w-full border-none bg-inherit ${
-                        isLegal ? "text-black" : "text-inherit"
-                      } hover:text-white`}
+                      className={`btn btn-primary w-full border-none bg-inherit text-inherit hover:text-white`}
                       onClick={() => handleClick(row, index)}
                     >
                       {col}
